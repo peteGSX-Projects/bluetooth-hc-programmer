@@ -20,7 +20,8 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 
-SoftwareSerial btSerial(2,3);
+// SoftwareSerial btSerial(2,3);
+SoftwareSerial btSerial(12,A3);
 
 char c=' ';
 
