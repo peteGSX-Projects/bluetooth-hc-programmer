@@ -1,0 +1,8 @@
+/*
+AT
+AT+HELP
+AT+NAME?
+AT+PIN?
+AT+BAUD?
+AT+VERSION
+*/
