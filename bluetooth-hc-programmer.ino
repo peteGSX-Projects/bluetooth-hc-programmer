@@ -20,8 +20,17 @@
 #include <Arduino.h>
 #include <SoftwareSerial.h>
 
-// SoftwareSerial btSerial(2,3);
-SoftwareSerial btSerial(12,A3);
+/***********************************************************************************
+If we haven't got a custom config.h, use the example
+***********************************************************************************/
+#if __has_include ( "config.h")
+  #include "config.h"
+#else
+  #warning config.h not found. Using defaults from config.example.h
+  #include "config.example.h"
+#endif
+
+SoftwareSerial btSerial(2,3);
 
 char c=' ';
 
