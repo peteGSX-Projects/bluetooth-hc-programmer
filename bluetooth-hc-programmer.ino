@@ -30,26 +30,34 @@ If we haven't got a custom config.h, use the example
   #include "config.example.h"
 #endif
 
-SoftwareSerial btSerial(2,3);
+SoftwareSerial btSerial(BT_TX,BT_RX);
 
 char c=' ';
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("Learning bluetooth apparently");  
-  // btSerial.begin(9600);
-  btSerial.begin(38400);
+  Serial.println("Ready to program");
+#if type == HC06
+   btSerial.begin(BT_HC06_BAUDRATE);
+#elif type == HC05
+  btSerial.begin(BT_HC05_BAUDRATE);
   pinMode(4, OUTPUT);
   digitalWrite(4, HIGH);
+#endif
+#ifndef INTERACTIVE
+
+#endif
 }
 
 void loop() {
+#ifdef INTERACTIVE
   if (btSerial.available()) {
     c = btSerial.read();
     Serial.write(c);
   }
- if (Serial.available()) {
-   c = Serial.read();
-   btSerial.write(c);
- }
+  if (Serial.available()) {
+    c = Serial.read();
+    btSerial.write(c);
+  }
+#endif
 }
