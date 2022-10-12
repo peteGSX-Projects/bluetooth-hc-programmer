@@ -9,29 +9,14 @@
 #define CONFIG_H
 
 /////////////////////////////////////////////////////////////////////////////////////
-//  Define module type being programmed.
-// 
-#define TYPE HC05
-// #define TYPE HC06
-
-/////////////////////////////////////////////////////////////////////////////////////
-//  Uncomment for interactive programming.
-//  Note that interactive programming is pointless for the HC-06.
-//  If left commented, all programming parameters below must be defined.
-// 
-// #define INTERACTIVE
-
-/////////////////////////////////////////////////////////////////////////////////////
-//  Define programming parameters.
-// 
-#define NAME BT_NAME
-#define PIN 123456
-
-/////////////////////////////////////////////////////////////////////////////////////
 //  Define baudrate and pins.
+//  HC-05 default is 38400 in AT mode
+//  HC-06 default is 9600
+//  EX-CommandStation requires 115200
 // 
-#define BT_HC06_BAUDRATE 9600
-#define BT_HC05_BAUDRATE 38400
+// #define BT_BAUDRATE 9600
+#define BT_BAUDRATE 38400
+// #define BT_BAUDRATE 115200
 #define BT_TX 2
 #define BT_RX 3
 #define BT_KEY 4

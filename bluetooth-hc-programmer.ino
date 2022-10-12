@@ -33,24 +33,17 @@ If we haven't got a custom config.h, use the example
 SoftwareSerial btSerial(BT_TX,BT_RX);
 
 char c=' ';
+bool programComplete = false;
 
 void setup() {
   Serial.begin(9600);
-  Serial.println("Ready to program");
-#if type == HC06
-   btSerial.begin(BT_HC06_BAUDRATE);
-#elif type == HC05
-  btSerial.begin(BT_HC05_BAUDRATE);
+  Serial.println("HC-05/06 programmer");
+  btSerial.begin(BT_BAUDRATE);
   pinMode(4, OUTPUT);
   digitalWrite(4, HIGH);
-#endif
-#ifndef INTERACTIVE
-
-#endif
 }
 
 void loop() {
-#ifdef INTERACTIVE
   if (btSerial.available()) {
     c = btSerial.read();
     Serial.write(c);
@@ -59,5 +52,4 @@ void loop() {
     c = Serial.read();
     btSerial.write(c);
   }
-#endif
 }
