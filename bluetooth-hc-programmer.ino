@@ -2,6 +2,9 @@
  *  © 2022 Peter Cole
  *
  *  This file is for programming HC-05/6 Bluetooth modules.
+ * 
+ *  Credit to multiple different examples on the Internet for this code, it
+ *  didn't orginate entirely from my head.
  *
  *  This is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -30,24 +33,30 @@ If we haven't got a custom config.h, use the example
   #include "config.example.h"
 #endif
 
+// Initialise software serial interface
 SoftwareSerial btSerial(BT_TX,BT_RX);
 
+// Placeholder char
 char c=' ';
-bool programComplete = false;
 
 void setup() {
+  // Start USB serial connection to the programmer
   Serial.begin(9600);
   Serial.println("HC-05/06 programmer");
+  // Start Bluetooth serial connection
   btSerial.begin(BT_BAUDRATE);
   pinMode(4, OUTPUT);
+  // Put HC-05 in AT mode if connected
   digitalWrite(4, HIGH);
 }
 
 void loop() {
+  // Write out any responses from Bluetooth to serial console
   if (btSerial.available()) {
     c = btSerial.read();
     Serial.write(c);
   }
+  // Write out any user entered commands from the serial console to Bluetooth serial
   if (Serial.available()) {
     c = Serial.read();
     btSerial.write(c);
